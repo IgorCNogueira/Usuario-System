@@ -4,17 +4,17 @@ abstract class RouteSwitch
 {
    protected function home()
    {
-      require __DIR__ . '/pages/home.html';
+      require __DIR__ . '/index.html';
    }
 
-   protected function about()
+   protected function login()
    {
-      require __DIR__ . '/pages/about.html';
+      require __DIR__ . '/View/login.html';
    }
 
-   protected function contact()
+   protected function signin()
    {
-      require __DIR__ . '/pages/contact.html';
+      require __DIR__ . '/View/signin.html';
    }
     
    public function __call($name, $arguments)
