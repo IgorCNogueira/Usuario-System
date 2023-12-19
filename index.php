@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/Router.php';
+require_once __DIR__ . '/routes/Router.php';
 
 $requestUri = $_SERVER['REQUEST_URI'];
 
