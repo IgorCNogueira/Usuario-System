@@ -31,13 +31,13 @@ class Router
    {
       return [
          'get' => [
-            '/' => fn () => self::load('HomeController', 'index'),
-            '/login' => fn () => self::load('LoginController', 'index'),
-            '/signin' => fn () => self::load('SigninController', 'index')
+            '/' =>  self::load('HomeController', 'index'),
+            '/login' =>  self::load('LoginController', 'index'),
+            '/signin' =>  self::load('SigninController', 'index')
          ],
 
          'post' => [
-            '/signin' => fn () => self::load('SigninController', 'store')
+            '/signin' =>  self::load('SigninController', 'store')
          ]
       ];
    }
