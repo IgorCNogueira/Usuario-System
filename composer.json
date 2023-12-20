@@ -1,0 +1,15 @@
+{
+    "name": "icnig/usuariosystem",
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "IgorCN",
+            "email": "icnigor1512@gmail.com"
+        }
+    ],
+    "require": {}
+}
