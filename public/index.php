@@ -1,7 +1,8 @@
 <?php
 
 require '../vendor/autoload.php';
-require_once __DIR__ . '/routes/Router.php';
+
+require_once __DIR__ . '../src/routes/Router.php';
 
 $requestUri = $_SERVER['REQUEST_URI'];
 
