@@ -3,6 +3,8 @@
 namespace src\routes;
 
 use Exception;
+use src\helpers\Request;
+use src\helpers\Uri;
 
 class Router
 {
@@ -31,14 +33,41 @@ class Router
    {
       return [
          'get' => [
-            '/' =>  self::load('HomeController', 'index'),
-            '/login' =>  self::load('LoginController', 'index'),
-            '/signin' =>  self::load('SigninController', 'index')
+            '/' => fn () => self::load('HomeController', 'index'),
+            '/login' => fn () => self::load('LoginController', 'index'),
+            '/signin' => fn () => self::load('SigninController', 'index')
          ],
 
          'post' => [
-            '/signin' =>  self::load('SigninController', 'store')
+            '/signin' => fn () => self::load('SigninController', 'store')
          ]
       ];
+   }
+
+   public static function execute()
+   {
+      try {
+         $routes = self::routes();
+         $request = Request::get();
+         $uri = Uri::get('path');
+
+         if(!isset($routes[$request])) {
+            throw new Exception("ROUTE NOT FOUND", 404);
+         }
+
+         if(!array_key_exists($uri, $routes[$request])) {
+            throw new Exception("ROUTE NOT FOUND", 404);
+         }
+
+         $router = $routes[$request][$uri];
+
+         if(!is_callable($router)) {
+            throw new Exception("ROUTE {$uri} NOT FOUND", 404);
+         }
+
+         $router();
+      } catch (\Throwable $th) {
+         echo $th->getMessage();
+      }
    }
 }
