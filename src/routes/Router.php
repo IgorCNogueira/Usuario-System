@@ -1,29 +1,44 @@
 <?php
 
-require_once __DIR__ . '/RouteSwitch.php';
+namespace src\routes;
 
-class Router extends RouteSwitch
+use Exception;
+
+class Router
 {
-   public function run(string $requestUri)
-   {
-      $route = $this->uriFormater($requestUri);
+   const CONTROLLER_NAMESPACE = 'src\\Controllers';
 
-      //viola OPC (Open/Closed Principle), corrigir mais tarde
-      // if ($route === '/') {
-      //    $this->home();
-      // } else {
-      //    $this->$route();
-      // }
+   public static function load(string $controller, string $method)
+   {
+      try {
+         $controllerNamespace = self::CONTROLLER_NAMESPACE.'\\'.$controller; 
+         if(!class_exists($controllerNamespace)) {
+            throw new Exception("{$controller} NOT FOUND", 404);
+         }
+
+         $controllerInstance = new $controllerNamespace;
+         if(!method_exists($controllerInstance, $method)) {
+            throw new Exception("{$method} NOT FOUND", 404);
+         }
+
+         $controllerInstance->$method();
+      } catch (\Throwable $th) {
+         echo $th->getMessage();
+      }
    }
 
-   public function uriFormater(string $uri) : string
+   public static function routes() : array
    {
-      $route = substr($uri, -1);
-      return $route;
-   }
+      return [
+         'get' => [
+            '/' => fn () => self::load('HomeController', 'index'),
+            '/login' => fn () => self::load('LoginController', 'index'),
+            '/signin' => fn () => self::load('SigninController', 'index')
+         ],
 
-   public function routeChecker(string $uri, RouteSwitch $rota)
-   {
-      
+         'post' => [
+            '/signin' => fn () => self::load('SigninController', 'store')
+         ]
+      ];
    }
 }
