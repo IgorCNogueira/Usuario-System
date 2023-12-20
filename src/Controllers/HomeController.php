@@ -2,10 +2,10 @@
 
 namespace src\Controllers;
 
-class HomeController
+class HomeController extends Controller
 {
    public function index()
    {
-      var_dump('home index');
+      $this->view('home', ['title' => 'Home']);
    }
 }

@@ -2,15 +2,15 @@
 
 namespace src\Controllers;
 
-class SigninController
+class SigninController extends Controller
 {
    public function index()
    {
-      var_dump('signin index');
+      $this->view('signin', ['title' => 'Cadastro']);
    }
 
-   public function store()
+   public function store($request)
    {
-      var_dump('signin store');
+      var_dump($request);
    }
 }

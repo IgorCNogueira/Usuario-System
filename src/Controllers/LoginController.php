@@ -2,10 +2,10 @@
 
 namespace src\Controllers;
 
-class LoginController
+class LoginController extends Controller
 {
    public function index()
    {
-      var_dump('login index');
+      $this->view('login', ['title' => 'Login']);
    }
 }

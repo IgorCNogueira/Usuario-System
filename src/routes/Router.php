@@ -23,7 +23,7 @@ class Router
             throw new Exception("{$method} NOT FOUND", 404);
          }
 
-         $controllerInstance->$method();
+         $controllerInstance->$method((object)$_REQUEST);
       } catch (\Throwable $th) {
          echo $th->getMessage();
       }
