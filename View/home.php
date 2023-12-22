@@ -1,4 +1,4 @@
-<?php $this->layout('master', ['title' => $title]) ?>
+<?php $this->layout('master', ['title' => $title, 'style' => $style]) ?>
 
 <div class="container">
    <section id="heading_section">

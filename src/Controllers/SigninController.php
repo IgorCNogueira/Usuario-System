@@ -6,7 +6,7 @@ class SigninController extends Controller
 {
    public function index()
    {
-      $this->view('signin', ['title' => 'Cadastro']);
+      $this->view('signin', ['title' => 'Cadastro', 'style' => '../public/css/signin.css']);
    }
 
    public function store($request)

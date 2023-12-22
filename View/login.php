@@ -1,4 +1,4 @@
-<?php $this->layout('master', ['title' => $title]) ?>
+<?php $this->layout('master', ['title' => $title, 'style' => $style]) ?>
 
 <form action="/login" method="get">
    <label for="email">Email</label><br>
