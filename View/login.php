@@ -15,14 +15,14 @@
       ">
       <form spellcheck="false" action="/login" method="get">
          <label for="email">Email</label><br>
-         <input type="email" name="email_login" id="email_input" placeholder="Insira seu email" required
+         <input type="email" name="email_login" placeholder="Insira seu email" required
             style="
                border-radius: 5px;
             ">
          <br>
          <br>
          <label for="password">Senha</label><br>
-         <input type="password" name="password_login" id="password_input" placeholder="Insira sua senha"  required
+         <input type="password" name="password_login" placeholder="Insira sua senha"  required
             style="
                border-radius: 5px;
             ">

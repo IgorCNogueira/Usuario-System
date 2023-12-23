@@ -14,7 +14,7 @@
          text-align: center;
          margin-bottom: 50px;
       ">
-      <form spellcheck="false" action="/signin" method="post">
+      <form spellcheck="false" action="/signin" method="store">
          <label for="name">Nome</label><br>
          <input type="text" name="name_signin" id="name_input" placeholder="Insira um nome" required
             style="
