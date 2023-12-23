@@ -1,13 +1,28 @@
-<?php $this->layout('master', ['title' => $title, 'style' => $style]) ?>
+<?php $this->layout('master', ['title' => $title]) ?>
 
-<div class="container">
-   <section id="heading_section">
-   <h1>Olá</h1>
-   <p>Escolha realizar seu Login ou Cadastrar-se</p>
+<div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   ">
+   <section 
+      style="@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'); 
+         font-family: 'Roboto Mono', monospace;
+         font-size: 20px;
+         color: white;
+         text-align: center;
+         margin-bottom: 50px;
+      ">
+      <h1>Olá</h1>
+      <p>Escolha realizar seu Login ou Cadastrar-se</p>
    </section>
 
-   <section id="section_Buttons">
-      <a href="/login"><button>Login</button></a>
-      <a href="/signin"><button>Cadastro</button></a>
+   <section style="
+      margin: 0 auto;
+      width: fit-content;
+   ">
+      <a href="/login"><button type="button" class="btn btn-outline-light">Login</button></a>
+      <a href="/signin"><button type="button" class="btn btn-outline-light">Cadastro</button></a>
    </section>
 </div>
