@@ -13,7 +13,7 @@
          text-align: center;
          margin-bottom: 50px;
       ">
-      <form spellcheck="false" action="/login" method="get">
+      <form spellcheck="false" action="/login" method="post">
          <label for="email">Email</label><br>
          <input type="email" name="email_login" placeholder="Insira seu email" required
             style="

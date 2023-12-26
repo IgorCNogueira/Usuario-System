@@ -14,30 +14,30 @@
          text-align: center;
          margin-bottom: 50px;
       ">
-      <form spellcheck="false" action="/signin" method="store">
-         <label for="name">Nome</label><br>
-         <input type="text" name="name_signin" id="name_input" placeholder="Insira um nome" required
+      <form spellcheck="false" action="/signin" method="post">
+         <label for="name_signin">Nome</label><br>
+         <input type="text" name="name_signin" placeholder="Insira um nome" required
             style="
                border-radius: 5px;
             ">
          <br>
          <br>
-         <label for="email">Email</label><br>
-         <input type="text" name="email_signin" id="email_input" placeholder="Insira um email" required
+         <label for="email_signin">Email</label><br>
+         <input type="text" name="email_signin" placeholder="Insira um email" required
             style="
                border-radius: 5px;
             ">
          <br>
          <br>
-         <label for="password">Senha</label><br>
-         <input type="text" name="password_signin" id="password_input" placeholder="Insira uma senha" required
+         <label for="password_signin">Senha</label><br>
+         <input type="password" name="password_signin" placeholder="Insira uma senha" required
             style="
                border-radius: 5px;
             ">
          <br>
          <br>
-         <label for="password_confirmation">Confirmar Senha</label><br>
-         <input type="text" name="password_confirm_signin" id="password_confirm_input" placeholder="Confirme a senha" required
+         <label for="password_confirm_signin">Confirmar Senha</label><br>
+         <input type="password" name="password_confirm_signin" placeholder="Confirme a senha" required
             style="
                border-radius: 5px;
             ">
