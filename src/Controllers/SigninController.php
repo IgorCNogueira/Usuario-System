@@ -24,13 +24,19 @@ class SigninController extends Controller
             $dataInsert = new DB();
             $dataReturn = $dataInsert->insertUsuarioTable([$request->name_signin, $request->email_signin, $request->password_signin]);
             if ($dataReturn) {
-               return 1;
+               $this->view('signin', [
+                  'title' => 'Cadastro',
+                  'message' => 'Cadastro realizado!'
+               ]);
             }
          }
       } catch (\Exception $th) {
          echo $th->getMessage();
       }
-      return 0;
+      $this->view('signin', [
+         'title' => 'Cadastro',
+         'message' => 'Cadastro falhou!'
+      ]);
    }
 }
 

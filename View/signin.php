@@ -1,5 +1,25 @@
 <?php $this->layout('master', ['title' => $title]) ?>
 
+<?php if(isset($message)): ?>
+<dialog open style="
+      border-color: white;
+      border-radius: 2pt;
+      padding: 5px;
+      width: fit-content;
+   ">
+   <?=$this->e($message)?>
+   <button type="button" style="
+      border-style: none;
+      border-radius: 1px;
+      background-color: white;
+      position: relative;
+      padding: 0;
+      margin-left: 5px;
+   " onclick="closeModal()">
+   ✕
+   </button>
+</dialog>
+<?php endif ?>
 
 <div style="
       position: absolute;
@@ -16,28 +36,29 @@
       ">
       <form spellcheck="false" action="/signin" method="post">
          <label for="name_signin">Nome</label><br>
-         <input type="text" name="name_signin" placeholder="Insira um nome" required
+         <input type="text" id="name_signin" name="name_signin" placeholder="Insira um nome" required
             style="
                border-radius: 5px;
             ">
          <br>
          <br>
          <label for="email_signin">Email</label><br>
-         <input type="text" name="email_signin" placeholder="Insira um email" required
+         <input type="text" id="email_signin" name="email_signin" placeholder="Insira um email" required
             style="
                border-radius: 5px;
             ">
+            
          <br>
          <br>
          <label for="password_signin">Senha</label><br>
-         <input type="password" name="password_signin" placeholder="Insira uma senha" required
+         <input type="password" id="password_signin" name="password_signin" placeholder="Insira uma senha" required
             style="
                border-radius: 5px;
             ">
          <br>
          <br>
          <label for="password_confirm_signin">Confirmar Senha</label><br>
-         <input type="password" name="password_confirm_signin" placeholder="Confirme a senha" required
+         <input type="password" id="password_confirm_signin" name="password_confirm_signin" placeholder="Confirme a senha" required
             style="
                border-radius: 5px;
             ">
@@ -50,3 +71,10 @@
       <a href="/"><button type="button" class="btn btn-outline-light">Voltar</button></a>
    </section>
 </div>
+
+<script>
+   const modal = document.querySelector("dialog");
+   function closeModal() {
+      modal.close();
+   }
+</script>
