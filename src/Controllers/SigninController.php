@@ -3,6 +3,9 @@
 namespace src\Controllers;
 
 use src\Database\DB;
+use src\Utils\EmailFilter;
+use src\Utils\NameFilter;
+use src\Utils\PasswordFilter;
 
 class SigninController extends Controller
 {
@@ -13,6 +16,9 @@ class SigninController extends Controller
 
    public function store($request)
    {
+      $nameValidation = new NameFilter();
+      $nameValidation = $nameValidation->nameValidate($request->name_signin);
+
       $emailValidation = new EmailFilter();
       $emailValidation = $emailValidation->emailVerification($request->email_signin);
       
@@ -20,71 +26,56 @@ class SigninController extends Controller
       $pwdValidation = $pwdValidation->pwdMatch($request->password_signin, $request->password_confirm_signin);
 
       try {
-         if($emailValidation && $pwdValidation) {
-            $dataInsert = new DB();
-            $dataReturn = $dataInsert->insertUsuarioTable([$request->name_signin, $request->email_signin, $request->password_signin]);
-            if ($dataReturn) {
-               $this->view('signin', [
+         if($nameValidation) {
+            if($emailValidation) {
+               if($pwdValidation) {
+                  $dataInsert = new DB();
+                  $dataReturn = $dataInsert->insertUsuarioTable([
+                     $request->name_signin, 
+                     $request->email_signin, 
+                     $request->password_signin
+                  ]);
+      
+                  if ($dataReturn) {
+                     return $this->view('signin', [
+                        'title' => 'Cadastro',
+                        'message' => 'Cadastro realizado!',
+                        'nameError' => false,
+                        'emailError' => false,
+                        'passwordError' => false
+                     ]);
+                  }
+               } else {
+                  return $this->view('signin', [
+                     'title' => 'Cadastro',
+                     'message' => 'Cadastro falhou!',
+                     'passwordError' => true
+                  ]);
+               }
+            } else {
+               return $this->view('signin', [
                   'title' => 'Cadastro',
-                  'message' => 'Cadastro realizado!'
+                  'message' => 'Cadastro falhou!',
+                  'emailError' => true
                ]);
             }
+         } else {
+            return $this->view('signin', [
+               'title' => 'Cadastro',
+               'message' => 'Cadastro falhou!',
+               'nameError' => true
+            ]);
          }
       } catch (\Exception $th) {
          echo $th->getMessage();
       }
-      $this->view('signin', [
+
+      return $this->view('signin', [
          'title' => 'Cadastro',
-         'message' => 'Cadastro falhou!'
+         'message' => 'Cadastro falhou!',
+         'nameError' => true,
+         'emailError' => true,
+         'passwordError' => true
       ]);
-   }
-}
-
-class EmailFilter
-{
-   public function emailVerification($email) : bool
-   {
-      try {
-         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return false;
-         }
-      } catch (\Exception $th) {
-         echo $th->getMessage();
-      }
-      return true;
-   }
-}
-
-class PasswordFilter
-{
-   public function pwdMatch($pwd, $pwdConfirmation) : bool
-   {
-      if ($this->pwdValidate($pwd, $pwdConfirmation)) {
-         try {   
-            if (!$pwd == $pwdConfirmation) {
-               return false;
-            }
-         } catch (\Exception $th) {
-            echo $th->getMessage();
-         }
-         return true;
-      } else {
-         return false;
-      }
-   }
-
-   public function pwdValidate($pwd, $pwdConfirmation) : bool
-   {
-      try {
-         if (!filter_var($pwd, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/[a-zA-Z0-9\-\_]{8,18}/")))) {
-            return false;
-         }
-         if (!filter_var($pwdConfirmation, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => "/[a-zA-Z0-9\-\_]{8,18}/")))) {
-            return false;
-         }
-      } catch (\Exception $th) {
-         echo $th->getMessage();
-      }
-      return true;
    }
 }

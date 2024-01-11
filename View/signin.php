@@ -27,11 +27,13 @@
       left: 50%;
       transform: translate(-50%, -50%);
    ">
-   <section style="@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'); 
+   <section style="
+         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'); 
          font-family: 'Roboto Mono', monospace;
          font-size: 20px;
          color: white;
          text-align: center;
+         align-items: center;
          margin-bottom: 50px;
       ">
       <form spellcheck="false" action="/signin" method="post">
@@ -41,14 +43,39 @@
                border-radius: 5px;
             ">
          <br>
+         <?php if(isset($nameError) && $nameError): ?>
+            <p style="
+               border-style: none;
+               margin: 0;
+               width: fit-content;
+               text-align: center;
+               font-size: 15px;
+               color: red;
+            ">
+            ✘
+            Nome inválido.
+            </p>
+         <?php endif ?>
          <br>
          <label for="email_signin">Email</label><br>
          <input type="text" id="email_signin" name="email_signin" placeholder="Insira um email" required
             style="
                border-radius: 5px;
             ">
-            
          <br>
+         <?php if(isset($emailError) && $emailError): ?>
+            <p style="
+               border-style: none;
+               margin: 0;
+               width: fit-content;
+               text-align: center;
+               font-size: 15px;
+               color: red;
+            ">
+            ✘
+            Email inválido.
+            </p>
+         <?php endif ?>
          <br>
          <label for="password_signin">Senha</label><br>
          <input type="password" id="password_signin" name="password_signin" placeholder="Insira uma senha" required
@@ -56,6 +83,19 @@
                border-radius: 5px;
             ">
          <br>
+         <?php if(isset($passwordError) && $passwordError): ?>
+            <p style="
+               border-style: none;
+               margin: 0;
+               width: fit-content;
+               text-align: center;
+               font-size: 15px;
+               color: red;
+            ">
+            ✘
+            Senha inválida.
+            </p>
+         <?php endif ?>
          <br>
          <label for="password_confirm_signin">Confirmar Senha</label><br>
          <input type="password" id="password_confirm_signin" name="password_confirm_signin" placeholder="Confirme a senha" required
@@ -63,6 +103,19 @@
                border-radius: 5px;
             ">
          <br>
+         <?php if(isset($passwordError) && $passwordError): ?>
+            <p style="
+               border-style: none;
+               margin: 0;
+               width: fit-content;
+               text-align: center;
+               font-size: 15px;
+               color: red;
+            ">
+            ✘
+            Senha inválida.
+         </p>
+         <?php endif ?>
          <br>
          <input type="submit" class="btn btn-outline-light" value="Cadastrar">
       </form>
