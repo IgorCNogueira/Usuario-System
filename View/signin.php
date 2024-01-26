@@ -26,6 +26,9 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: fit-content;
+      display: flex;
+      justify-content: center;
    ">
    <section style="
          @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'); 
@@ -34,7 +37,7 @@
          color: white;
          text-align: center;
          align-items: center;
-         margin-bottom: 50px;
+         margin-bottom: 25px;
       ">
       <form spellcheck="false" action="/signin" method="post">
          <label for="name_signin">Nome</label><br>
@@ -42,6 +45,21 @@
             style="
                border-radius: 5px;
             ">
+         <?php if(isset($nameError) && $nameError):  ?>
+               <p style="
+                     position: absolute;
+                     border-style: none;
+                     margin: 0;
+                     width: 300px;
+                     text-align: center;
+                     font-size: 13px;
+                     right: -280px;
+                     top: 15px;
+                     left: 250px;
+                  ">
+                  o Nome deve iniciar com uma letra e possuir pelo menos 3, não pode conter números, pode conter espaços e pontos.
+               </p>
+         <?php endif ?>
          <br>
          <?php if(isset($nameError) && $nameError): ?>
             <p style="
@@ -58,30 +76,69 @@
          <?php endif ?>
          <br>
          <label for="email_signin">Email</label><br>
-         <input type="text" id="email_signin" name="email_signin" placeholder="Insira um email" required
-            style="
-               border-radius: 5px;
-            ">
-         <br>
-         <?php if(isset($emailError) && $emailError): ?>
-            <p style="
-               border-style: none;
-               margin: 0;
+         <section style="
+               display: flex;
                width: fit-content;
-               text-align: center;
-               font-size: 15px;
-               color: red;
+               height: fit-content;
+               flex-direction: column;
+               flex-wrap: wrap;
             ">
-            ✘
-            Email inválido.
-            </p>
-         <?php endif ?>
+            <input type="text" id="email_signin" class="input" name="email_signin" placeholder="Insira um email" required
+               style="
+                  border-radius: 5px;
+               ">
+            <?php if(isset($emailError) && $emailError): ?>
+               <p style="
+                     position: absolute;
+                     border-style: none;
+                     margin: 0;
+                     width: 200px;
+                     text-align: center;
+                     font-size: 15px;
+                     left: 250px;
+                     top: 133px;
+                  ">
+                  Email inválido
+               </p>
+            <?php endif ?>
+            
+            <?php if(isset($emailError) && $emailError): ?>
+               <p style="
+                  border-style: none;
+                  margin: 0;
+                  width: fit-content;
+                  text-align: center;
+                  font-size: 15px;
+                  color: red;
+               ">
+               ✘
+               Email inválido.
+               </p>
+            <?php endif ?>
+         </section>
+         
          <br>
          <label for="password_signin">Senha</label><br>
          <input type="password" id="password_signin" name="password_signin" placeholder="Insira uma senha" required
             style="
                border-radius: 5px;
             ">
+         <?php if(isset($passwordError) && $passwordError): ?>
+            <p style="
+                  position: absolute;
+                  border-style: none;
+                  margin: 0;
+                  width: 300px;
+                  text-align: center;
+                  font-size: 13px;
+                  left: 250px;
+                  top: 205px;
+               ">
+               Senha inválida. A senha deve possuir no mínimo 8 caracteres
+               letras Maiúsculas e Minúsculas, caracteres especiais
+               "-" e/ou "_", também numeros.
+            </p>
+         <?php endif ?>
          <br>
          <?php if(isset($passwordError) && $passwordError): ?>
             <p style="
@@ -113,15 +170,15 @@
                color: red;
             ">
             ✘
-            Senha inválida.
+            Senhas não coincidem.
          </p>
          <?php endif ?>
          <br>
          <input type="submit" class="btn btn-outline-light" value="Cadastrar">
+         <br>
+         <br>
+         <a href="/"><button type="button" class="btn btn-outline-light">Voltar</button></a>
       </form>
-      <br>
-      <br>
-      <a href="/"><button type="button" class="btn btn-outline-light">Voltar</button></a>
    </section>
 </div>
 

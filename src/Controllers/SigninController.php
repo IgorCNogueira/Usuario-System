@@ -2,7 +2,7 @@
 
 namespace src\Controllers;
 
-use src\Database\DB;
+use src\Database\insertValidation;
 use src\Utils\EmailFilter;
 use src\Utils\NameFilter;
 use src\Utils\PasswordFilter;
@@ -25,47 +25,20 @@ class SigninController extends Controller
       $pwdValidation = new PasswordFilter();
       $pwdValidation = $pwdValidation->pwdMatch($request->password_signin, $request->password_confirm_signin);
 
+      $verifyAndInsert = new insertValidation();
+
       try {
-         if($nameValidation) {
-            if($emailValidation) {
-               if($pwdValidation) {
-                  $dataInsert = new DB();
-                  $dataReturn = $dataInsert->insertUsuarioTable([
-                     $request->name_signin, 
-                     $request->email_signin, 
-                     $request->password_signin
-                  ]);
-      
-                  if ($dataReturn) {
-                     return $this->view('signin', [
-                        'title' => 'Cadastro',
-                        'message' => 'Cadastro realizado!',
-                        'nameError' => false,
-                        'emailError' => false,
-                        'passwordError' => false
-                     ]);
-                  }
-               } else {
-                  return $this->view('signin', [
-                     'title' => 'Cadastro',
-                     'message' => 'Cadastro falhou!',
-                     'passwordError' => true
-                  ]);
-               }
-            } else {
-               return $this->view('signin', [
-                  'title' => 'Cadastro',
-                  'message' => 'Cadastro falhou!',
-                  'emailError' => true
-               ]);
-            }
-         } else {
-            return $this->view('signin', [
-               'title' => 'Cadastro',
-               'message' => 'Cadastro falhou!',
-               'nameError' => true
+         return $verifyAndInsert->processData(
+            [
+               $request->name_signin, 
+               $request->email_signin, 
+               $request->password_signin
+            ], 
+            [
+               $nameValidation,
+               $emailValidation,
+               $pwdValidation
             ]);
-         }
       } catch (\Exception $th) {
          echo $th->getMessage();
       }
