@@ -41,7 +41,8 @@ class insertValidation extends Controller
                   return $this->view('signin', [
                      'title' => 'Cadastro',
                      'message' => 'Cadastro falhou!',
-                     'emailError' => true
+                     'emailError' => true,
+                     'nameData' => $requestData[0]
                   ]);
                }
             } else {
