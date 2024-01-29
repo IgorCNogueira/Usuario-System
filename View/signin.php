@@ -15,7 +15,7 @@
 
          <label>Nome</label>
          <br>
-         <input type="text" class="signin_inputs" name="name_signin" <?php if(isset($emailError) && $emailError): ?>value="<?=$this->e($nameData);?>" <?php endif ?> placeholder="Insira um nome" required>
+         <input type="text" class="signin_inputs" name="name_signin" <?php if(isset($nameError) && $nameError): ?>value="<?=$this->e($nameData);?>" <?php endif ?> placeholder="Insira um nome" required>
             
          <?php if(isset($nameError) && $nameError): ?>
             <p class="underInputMessage">
@@ -36,7 +36,7 @@
 
          <label>Email</label>
          <br>
-         <input type="text" class="signin_inputs" name="email_signin" placeholder="Insira um email" required>
+         <input type="text" class="signin_inputs" name="email_signin"<?php if(isset($emailError) && $emailError): ?>value="<?=$this->e($emailData); ?>" <?php endif ?>placeholder="Insira um email" required>
          
          <?php if(isset($emailError) && $emailError): ?>
             <p class="underInputMessage">

@@ -28,13 +28,11 @@ class SigninController extends Controller
       $verifyAndInsert = new insertValidation();
 
       try {
-         return $verifyAndInsert->processData(
-            [
+         return $verifyAndInsert->processData([
                $request->name_signin, 
                $request->email_signin, 
                $request->password_signin
-            ], 
-            [
+            ], [
                $nameValidation,
                $emailValidation,
                $pwdValidation

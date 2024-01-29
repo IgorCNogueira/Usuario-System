@@ -34,7 +34,9 @@ class insertValidation extends Controller
                      return $this->view('signin', [
                         'title' => 'Cadastro',
                         'message' => 'Cadastro falhou!',
-                        'passwordError' => true
+                        'passwordError' => true,
+                        'nameData' => $requestData[0],
+                        'emailData' => $requestData[1]
                      ]);
                   }
                } else {
@@ -42,14 +44,17 @@ class insertValidation extends Controller
                      'title' => 'Cadastro',
                      'message' => 'Cadastro falhou!',
                      'emailError' => true,
-                     'nameData' => $requestData[0]
+                     'nameData' => $requestData[0],
+                     'emailData' => $requestData[1]
                   ]);
                }
             } else {
                return $this->view('signin', [
                   'title' => 'Cadastro',
                   'message' => 'Cadastro falhou!',
-                  'nameError' => true
+                  'nameError' => true,
+                  'nameData' => $requestData[0],
+                  'emailData' => $requestData[1]
                ]);
             }
          } catch (\Exception $th) {

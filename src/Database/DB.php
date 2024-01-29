@@ -15,6 +15,8 @@ class DB extends Connection
       $stmt->bind_param("sss", $values[0], $values[1], $values[2]);
       
       $result = $stmt->execute();
+
+      self::$connection->close();
       
       return $result;
    }
