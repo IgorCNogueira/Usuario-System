@@ -20,4 +20,27 @@ class DB extends Connection
       
       return $result;
    }
+
+   public function getUsuarioLogin(array $values)
+   {
+      //dados a serem encripitados
+      $encryptedEmail = $values[0];
+      $encryptedPwd = $values[1];
+
+      $this->__construct();
+
+      $stmt = self::$connection->prepare("SELECT Email, Senha FROM usuario WHERE Email=? AND Senha=?;");
+
+      $stmt->bind_param("ss", $encryptedEmail, $encryptedPwd);
+ 
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+
+      $row = $result->fetch_assoc();
+
+      self::$connection->close();
+
+      return $row;
+   }
 }

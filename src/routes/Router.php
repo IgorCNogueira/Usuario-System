@@ -39,7 +39,7 @@ class Router
          ],
 
          'post' => [
-            '/login' => fn () => self::load('LoginController', 'index'),
+            '/login' => fn () => self::load('LoginController', 'loginUser'),
             '/signin' => fn () => self::load('SigninController', 'store')
          ]
       ];

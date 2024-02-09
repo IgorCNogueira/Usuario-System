@@ -14,11 +14,15 @@ class insertValidation extends Controller
             if($dataConfirm[0]) {
                if($dataConfirm[1]) {
                   if($dataConfirm[2]) {
+                     //Dados a serem encripitados
+                     $encryptedEmail = $requestData[1];
+                     $encryptedPwd = $requestData[2];
+
                      $dataInsert = new DB();
                      $dataReturn = $dataInsert->insertUsuarioTable([
-                        $requestData[0], 
-                        $requestData[1], 
-                        $requestData[2]
+                        $requestData[0],
+                        $encryptedEmail,
+                        $encryptedPwd
                      ]);
          
                      if ($dataReturn) {
